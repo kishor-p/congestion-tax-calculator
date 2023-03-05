@@ -1,20 +1,6 @@
 {
   "testCases": [
 
-    {
-      "description": "Test SingleCharge MULTI test",
-      "vehicleType": "car",
-      "dates": [
-        "2013-08-22 06:59:00",
-        "2013-08-22 07:15:00",
-        "2013-08-22 07:45:00",
-        "2013-08-22 08:00:00",
-        "2013-08-22 08:31:00",
-        "2013-08-22 16:00:00",
-        "2013-08-22 17:00:00"
-      ],
-      "expectedTax": 49
-    },
     {"description": "Test 06:00–06:29","vehicleType":  "car", "dates":  ["2013-08-22 06:00:00"], "expectedTax":  8},
 
     {"description": "Test 06:30–06:59","vehicleType":  "car", "dates":  ["2013-08-22 06:30:00"], "expectedTax":  13},
@@ -53,9 +39,26 @@
     {"description": "Test SingleCharge 07:00–07:59","vehicleType":  "car",
     "dates":  ["2013-08-12 07:15:00", "2013-08-12 07:58:00","2013-08-12 08:35:00"],
     "expectedTax":  26
+    },
+
+    {"description": "Test Toll FREE Vehicle","vehicleType":  "tRacTor",
+      "dates":  ["2013-08-12 07:15:00", "2013-08-12 07:58:00","2013-08-12 08:35:00"],
+      "expectedTax":  0
+    },
+    {
+      "description": "Test SingleCharge and Multiple times pass",
+      "vehicleType": "car",
+      "dates": [
+        "2013-08-22 06:59:00",
+        "2013-08-22 07:15:00",
+        "2013-08-22 07:45:00",
+        "2013-08-22 08:00:00",
+        "2013-08-22 08:31:00",
+        "2013-08-22 16:00:00",
+        "2013-08-22 17:00:00"
+      ],
+      "expectedTax": 49
     }
-
-
   ],
 
   "congestionConfig": {
