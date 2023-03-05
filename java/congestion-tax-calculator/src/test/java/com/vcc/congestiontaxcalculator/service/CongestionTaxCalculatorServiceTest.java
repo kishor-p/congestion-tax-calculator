@@ -2,8 +2,7 @@ package com.vcc.congestiontaxcalculator.service;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vcc.congestiontaxcalculator.model.Car;
-import com.vcc.congestiontaxcalculator.model.Vehicle;
+import com.vcc.congestiontaxcalculator.model.vehicles.Vehicle;
 import com.vcc.congestiontaxcalculator.model.config.CongestionConfig;
 import com.vcc.congestiontaxcalculator.model.config.TollFreeCalendar;
 import com.vcc.congestiontaxcalculator.model.dto.CalculateTaxPayloadDto;
@@ -15,7 +14,6 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

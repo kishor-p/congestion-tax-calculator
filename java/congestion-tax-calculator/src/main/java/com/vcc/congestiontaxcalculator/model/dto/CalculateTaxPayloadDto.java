@@ -1,6 +1,6 @@
 package com.vcc.congestiontaxcalculator.model.dto;
 
-import com.vcc.congestiontaxcalculator.model.Vehicle;
+import com.vcc.congestiontaxcalculator.model.vehicles.Vehicle;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

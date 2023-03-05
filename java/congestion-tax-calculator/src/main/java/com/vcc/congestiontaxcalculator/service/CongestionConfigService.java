@@ -2,12 +2,13 @@ package com.vcc.congestiontaxcalculator.service;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vcc.congestiontaxcalculator.model.Vehicle;
+import com.vcc.congestiontaxcalculator.model.vehicles.Vehicle;
 import com.vcc.congestiontaxcalculator.model.config.CongestionCharge;
 import com.vcc.congestiontaxcalculator.model.config.CongestionConfig;
 import com.vcc.congestiontaxcalculator.model.config.TollFreeCalendar;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -28,6 +29,9 @@ import java.util.Map;
 @Scope("singleton")
 @Slf4j
 public class CongestionConfigService {
+
+    @Value("${congestion-tax-calculator.configuration.file}")
+    private String configFile;
 
     //The whole CongestionConfig loaded from json
     @Getter
@@ -54,7 +58,7 @@ public class CongestionConfigService {
       try{
           ObjectMapper oMapper = new ObjectMapper();
           oMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-          File file = new File(this.getClass().getClassLoader().getResource("congestion-config.json").getFile());
+          File file = new File(this.getClass().getClassLoader().getResource(configFile).getFile());
           congestionConfig = oMapper.readValue(file, CongestionConfig.class);
 
           congestionChargesByCity = new HashMap<>();

@@ -1,4 +1,4 @@
-package com.vcc.congestiontaxcalculator.model;
+package com.vcc.congestiontaxcalculator.model.vehicles;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,16 +1,18 @@
 package com.vcc.congestiontaxcalculator.service;
 
-import com.vcc.congestiontaxcalculator.model.Vehicle;
+import com.vcc.congestiontaxcalculator.model.vehicles.Vehicle;
 import com.vcc.congestiontaxcalculator.model.config.CongestionCharge;
 import com.vcc.congestiontaxcalculator.model.dto.CalculateTaxPayloadDto;
 import com.vcc.congestiontaxcalculator.model.error.CongestionCalculatorException;
 import com.vcc.congestiontaxcalculator.model.error.ErrorCodes;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
@@ -19,6 +21,7 @@ import java.util.List;
  * <li>Implementation of {@link CongestionTaxCalculatorService}</li>
  */
 @Service
+@Slf4j
 public class CongestionTaxCalculatorServiceImpl implements CongestionTaxCalculatorService{
 
     // Default CITY if the payload is missing.
@@ -41,10 +44,12 @@ public class CongestionTaxCalculatorServiceImpl implements CongestionTaxCalculat
     @Override
     public double getTax(CalculateTaxPayloadDto calculatePayload) throws CongestionCalculatorException {
 
+        // Check if VehicleType provided
         if(calculatePayload.getVehicle() == null || !StringUtils.hasText(calculatePayload.getVehicle().getVehicleType())){
             throw new CongestionCalculatorException(ErrorCodes.ERR_01_400_01);
         }
 
+        // Check if Dates provided
         if(calculatePayload.getDates() == null || calculatePayload.getDates().size() == 0){
             throw new CongestionCalculatorException(ErrorCodes.ERR_01_400_02);
         }
@@ -99,10 +104,10 @@ public class CongestionTaxCalculatorServiceImpl implements CongestionTaxCalculat
         // Check if Vehicle or Date is TOLL FREE
         if (isTollFreeDate(date) || configService.isTollFreeVehicle(vehicle)) return 0;
 
-        int hour = date.getHour();
-        int minute = date.getMinute();
-        int hourMinutes = Integer.parseInt(hour+""+minute);
-        if(minute == 0){hourMinutes*=10;}
+
+        // In configuration Hours and Minutes are stores as Integers in HHmm format.
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HHmm");
+        int hourMinutes = Integer.parseInt(date.toLocalTime().format(dtf));
 
         // Fetch all Congestion amounts for hte specific city
         List<CongestionCharge> charges =  configService.fetchCongestionChargesForCity(city);
@@ -132,7 +137,7 @@ public class CongestionTaxCalculatorServiceImpl implements CongestionTaxCalculat
         int dayOfMonth = date.getDayOfMonth();
 
         // If the Day is SUNDAY or SATURDAY then it is TOLL FREE
-        if (dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY) return true;
+        if (dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY) { return true; }
 
 
         // Before checking Date check If whole month is TOLL FREE
