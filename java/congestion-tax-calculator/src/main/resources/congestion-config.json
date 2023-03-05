@@ -1,0 +1,35 @@
+{
+  "taxRules": [
+    {
+      "city": "GOTHENBURG",
+      "congestionCharges": [
+        {"startHour": 600,"endHour": 629,"amount": 8},
+        {"startHour": 630,"endHour": 659,"amount": 13},
+        {"startHour": 700,"endHour":759,"amount": 18},
+        {"startHour": 800,"endHour": 829,"amount": 13},
+        {"startHour": 830,"endHour": 1459,"amount": 8},
+        {"startHour": 1500,"endHour": 1529,"amount": 13},
+        {"startHour": 1530,"endHour": 1659,"amount": 18},
+        {"startHour": 1700,"endHour": 1759,"amount": 13},
+        {"startHour": 1800,"endHour": 1829,"amount": 8},
+        {"startHour": 1830,"endHour": 559,"amount": 0}
+      ]
+    }
+  ],
+  "tollFreeVehicleTypes": ["MOTORCYCLE", "TRACTOR","EMERGENCY", "DIPLOMAT", "FOREIGN", "MILITARY"],
+  "tollFreeCalenders":[
+    {
+      "year": 2013,
+      "tollFreeMonths": [7],
+      "tollFreeDays": [
+        {"month": 1, "days": [1]},
+        {"month": 3, "days": [28, 29]},
+        {"month": 4, "days": [1, 30]},
+        {"month": 5, "days": [1,8,9]},
+        {"month": 6, "days": [5,6,21]},
+        {"month": 11, "days": [1]},
+        {"month": 12, "days": [24,25,26,31]}
+      ]
+    }
+  ]
+}

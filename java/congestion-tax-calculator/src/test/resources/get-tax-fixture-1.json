@@ -1,0 +1,96 @@
+{
+  "testCases": [
+
+    {
+      "description": "Test SingleCharge MULTI test",
+      "vehicleType": "car",
+      "dates": [
+        "2013-08-22 06:59:00",
+        "2013-08-22 07:15:00",
+        "2013-08-22 07:45:00",
+        "2013-08-22 08:00:00",
+        "2013-08-22 08:31:00",
+        "2013-08-22 16:00:00",
+        "2013-08-22 17:00:00"
+      ],
+      "expectedTax": 49
+    },
+    {"description": "Test 06:00–06:29","vehicleType":  "car", "dates":  ["2013-08-22 06:00:00"], "expectedTax":  8},
+
+    {"description": "Test 06:30–06:59","vehicleType":  "car", "dates":  ["2013-08-22 06:30:00"], "expectedTax":  13},
+
+    {"description": "Test 07:00–07:59","vehicleType":  "car", "dates":  ["2013-08-22 07:15:00"], "expectedTax":  18},
+    {"description": "Test 07:00–07:59","vehicleType":  "car", "dates":  ["2013-08-22 07:58:00"], "expectedTax":  18},
+
+    {"description": "Test 08:00–08:29","vehicleType":  "car", "dates":  ["2013-08-22 08:10:59"], "expectedTax":  13},
+
+    {"description": "Test 08:30–14:59","vehicleType":  "car", "dates":  ["2013-08-22 08:45:00"], "expectedTax":  8},
+    {"description": "Test 08:30–14:59","vehicleType":  "car", "dates":  ["2013-08-22 11:15:00"], "expectedTax":  8},
+
+    {"description": "Test 15:00–15:29","vehicleType":  "car", "dates":  ["2013-08-22 15:15:00"], "expectedTax":  13},
+    {"description": "Test 15:00–15:29","vehicleType":  "car", "dates":  ["2013-08-22 15:00:00"], "expectedTax":  13},
+
+    {"description": "Test 15:30–16:59","vehicleType":  "car", "dates":  ["2013-08-22 15:45:00"], "expectedTax":  18},
+    {"description": "Test 15:30–16:59","vehicleType":  "car", "dates":  ["2013-08-22 16:15:00"], "expectedTax":  18},
+    {"description": "Test 15:30–16:59","vehicleType":  "car", "dates":  ["2013-08-22 16:45:00"], "expectedTax":  18},
+
+    {"description": "Test 17:00–17:59","vehicleType":  "car", "dates":  ["2013-08-22 17:15:00"], "expectedTax":  13},
+    {"description": "Test 17:00–17:59","vehicleType":  "car", "dates":  ["2013-08-22 17:45:00"], "expectedTax":  13},
+
+    {"description": "Test 18:00–18:29","vehicleType":  "car", "dates":  ["2013-08-22 18:15:00"], "expectedTax":  8},
+
+    {"description": "Test 18:30–05:59","vehicleType":  "car", "dates":  ["2013-08-22 18:30:00"], "expectedTax":  0},
+    {"description": "Test 18:30–05:59","vehicleType":  "car", "dates":  ["2013-08-22 19:45:00"], "expectedTax":  0},
+    {"description": "Test 18:30–05:59","vehicleType":  "car", "dates":  ["2013-08-22 01:15:00"], "expectedTax":  0},
+    {"description": "Test 18:30–05:59","vehicleType":  "car", "dates":  ["2013-08-22 05:45:00"], "expectedTax":  0},
+
+
+    {"description": "Test SATURDAY 07:00–07:59","vehicleType":  "car", "dates":  ["2013-05-26 07:15:00"], "expectedTax":  0},
+    {"description": "Test SUNDAY 07:00–07:59","vehicleType":  "car", "dates":  ["2013-05-26 07:15:00"], "expectedTax":  0},
+
+    {"description": "Test RED-DAY 07:00–07:59","vehicleType":  "car", "dates":  ["2013-05-01 07:15:00"], "expectedTax":  0},
+
+    {"description": "Test SingleCharge 07:00–07:59","vehicleType":  "car",
+    "dates":  ["2013-08-12 07:15:00", "2013-08-12 07:58:00","2013-08-12 08:35:00"],
+    "expectedTax":  26
+    }
+
+
+  ],
+
+  "congestionConfig": {
+    "taxRules": [
+      {
+        "city": "GOTHENBURG",
+        "congestionCharges": [
+          {"startHour": 600,"endHour": 629,"amount": 8},
+          {"startHour": 630,"endHour": 659,"amount": 13},
+          {"startHour": 700,"endHour":759,"amount": 18},
+          {"startHour": 800,"endHour": 829,"amount": 13},
+          {"startHour": 830,"endHour": 1459,"amount": 8},
+          {"startHour": 1500,"endHour": 1529,"amount": 13},
+          {"startHour": 1530,"endHour": 1659,"amount": 18},
+          {"startHour": 1700,"endHour": 1759,"amount": 13},
+          {"startHour": 1800,"endHour": 1829,"amount": 8},
+          {"startHour": 1830,"endHour": 559,"amount": 0}
+        ]
+      }
+    ],
+    "tollFreeVehicleTypes": ["MOTORCYCLE", "TRACTOR","EMERGENCY", "DIPLOMAT", "FOREIGN", "MILITARY"],
+    "tollFreeCalenders":[
+      {
+        "year": 2013,
+        "tollFreeMonths": [7],
+        "tollFreeDays": [
+          {"month": 1, "days": [1]},
+          {"month": 3, "days": [28, 29]},
+          {"month": 4, "days": [1, 30]},
+          {"month": 5, "days": [1,8,9]},
+          {"month": 6, "days": [5,6,21]},
+          {"month": 11, "days": [1]},
+          {"month": 12, "days": [24,25,26,31]}
+        ]
+      }
+    ]
+  }
+}
